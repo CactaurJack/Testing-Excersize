@@ -39,15 +39,24 @@ namespace TestingExercise
 
                 Console.Clear();
 
-                if (game.Guess(keyinfo.KeyChar))
+                switch(game.Guess(keyinfo.KeyChar))
                 {
-                    Console.Beep(2000, 10);
-                    Console.WriteLine("Great guess!");
-                }
-                else
-                {
-                    Console.Beep(100, 10);
-                    Console.WriteLine("Oh no! Things are heating up!");
+                    case GuessResult.Correct:
+                        Console.Beep(2000, 10);
+                        Console.WriteLine("Great guess!");
+                        break;
+                    case GuessResult.Wrong:
+                        Console.Beep(100, 10);
+                        Console.WriteLine("Oh no! Things are heating up!");
+                        break;
+                    case GuessResult.Multiple:
+                        Console.Beep(100, 10);
+                        Console.WriteLine("You already guessed that");
+                        break;
+                    case GuessResult.NotLetter:
+                        Console.Beep(100, 10);
+                        Console.WriteLine("That wasn't a letter");
+                        break;
                 }
             }
             Renderer.DrawPot(game.WrongGuesses);
